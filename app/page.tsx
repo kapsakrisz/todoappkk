@@ -1,5 +1,5 @@
 import Header from "@/Components/Header"
-
+import Board from "@/Components/Board"
 
 export default function Home() {
   return (
@@ -8,6 +8,7 @@ export default function Home() {
 
       {/*header*/}
       <Header/>
+      <Board/>
       <h1>mofo yoyo</h1>
     </main>
   )
