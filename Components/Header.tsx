@@ -35,6 +35,11 @@ className='w-44 md:w-56 pb-1 object-contain'
 </div>
 
 </div>
+<div>
+    <p>
+        <UserCircleIcon className='inline-block h-10 w-10'/>
+    </p>
+</div>
 </header>
 
 

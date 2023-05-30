@@ -1,9 +1,9 @@
 import Header from "@/Components/Header"
-import Head from "next/head"
+
 
 export default function Home() {
   return (
-    <main className="">
+    <main>
       
 
       {/*header*/}
