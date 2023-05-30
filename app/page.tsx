@@ -9,7 +9,7 @@ export default function Home() {
       {/*header*/}
       <Header/>
       <Board/>
-      <h1>mofo yoyo</h1>
+      
     </main>
   )
 }

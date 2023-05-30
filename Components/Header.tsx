@@ -20,7 +20,7 @@ src="/kklogov4.jpg"
 width={300}
 height={100}
 alt=""
-className='w-44 md:w-56 pb-1 object-contain'
+className='w-44 md:w-56 pb-1 object-contain rounded-full'
 
 />
  
