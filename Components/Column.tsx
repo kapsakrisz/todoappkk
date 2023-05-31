@@ -5,7 +5,7 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 type Props ={
     id:TypedColumn,
     todos:Todo[],
-    index:number
+    index:number;
 };
 
 

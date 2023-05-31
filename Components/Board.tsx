@@ -1,7 +1,7 @@
 "use client"
 import Column from './Column';
 import { useBoardStore } from '@/store/BoardStore';
-import React, { useEffect } from 'react';
+import React, { useEffect, } from 'react';
 import {DragDropContext, Droppable,DropResult} from 'react-beautiful-dnd';
 
 function Board () {
