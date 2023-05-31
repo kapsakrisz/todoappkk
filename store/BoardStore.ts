@@ -6,7 +6,7 @@ board:Board;
 getBoard:()=>void;
 }
 
-export const useBoardStore = create((set) => ({
+export  const useBoardStore = create<BoardState>((set) => ({
   board:{
     columns:new Map<TypedColumn,Column>()
   },
