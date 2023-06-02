@@ -21,7 +21,7 @@ const response = await openai.createChatCompletion({
         },
         {
             role:"user",
-            content:`hi there provide a summary of the following todos.count how many todos are in each category such as to do, in progress, and done then tell the user to have a productive day and make a simple joke regarding an office! here is the data: ${JSON.stringify(todos)}`,
+            content:`hi there provide a summary of the following todos.count how many todos are in each category such as to do, in progress, and done then tell the user to have a productive day and make a chuck norris joke ! here is the data: ${JSON.stringify(todos)}`,
         }
     ]
 
