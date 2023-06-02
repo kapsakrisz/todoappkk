@@ -16,8 +16,8 @@ const response = await openai.createChatCompletion({
     messages:[
         {
             role:"system",
-            content:`When responding, welcome the user as Zsengeborso and say welcome to the agy nelkuliek  todo appjan!
-            limit the response to 200 characters`,
+            content:`When responding, welcome the user as Zsákos Frodo and say welcome to the agy nelkuliek  todo appjan!
+            limit the response to 300 characters`,
         },
         {
             role:"user",
