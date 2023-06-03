@@ -7,6 +7,15 @@ board:Board;
 getBoard:()=>void;
 setBoardState:(board:Board) => void;
 updateTodoInDB:(todo:Todo,columnId:TypedColumn)=>void;
+newTaskInput:string;
+setNewTaskInput: (input: string)=>void;
+setNewTaskType:(columnId:TypedColumn) => void;
+newTaskType:TypedColumn;
+
+
+
+
+
 
 
 searchString:string;
@@ -25,6 +34,8 @@ export  const useBoardStore = create<BoardState>((set,get) => ({
 
 
   searchString:"",
+  newTaskInput:"",
+  newTaskType:"todo",
   setSearchString:(searchString)=> set ({searchString}),
 
 
@@ -60,6 +71,8 @@ const newColumns= new Map(get().board.columns);
 
   },
 
+  setNewTaskInput:(input:string)=> set({newTaskInput:input}),
+ setNewTaskType:(columnId:TypedColumn)=>set({newTaskType:columnId}),
   updateTodoInDB:async (todo, columnId)=> {
     await databases.updateDocument(
       process.env.NEXT_PUBLIC_DATABASE_ID!,

@@ -29,8 +29,7 @@ const response = await openai.createChatCompletion({
 const {data} = response;
 
 
-console.log("DATA IS:",data);
-console.log(data.choices[0].message);
+
 
 return NextResponse.json(data.choices[0].message);
 
