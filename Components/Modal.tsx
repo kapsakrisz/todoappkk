@@ -1,11 +1,11 @@
 'use client';
 
 
-import {  Fragment, useRef } from 'react'
+import {  FormEvent, Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useModalStore } from '@/store/ModalStore';
 import { useBoardStore } from '@/store/BoardStore';
-import TaskTypeRadioGroup from './TaskTypeRadioGRoup';
+import TaskTypeRadioGroup from './TaskTypeRadioGroup';
 import Image from 'next/image';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 
@@ -14,7 +14,7 @@ function Modal() {
   const imagePickerRef= useRef <HTMLInputElement>(null);
 
 
-    const [addTask,image,setImage,newTaskInput,setNewTaskInput] =useBoardStore ((state)=>[
+    const [addTask,image,setImage,newTaskInput,setNewTaskInput,newTaskType] =useBoardStore ((state)=>[
         
 
 
@@ -23,6 +23,7 @@ function Modal() {
       state.setImage,
       state.newTaskInput,
         state.setNewTaskInput,
+        state.newTaskType,
     ]);
   
   const [isOpen,closeModal] = useModalStore((state)=> [
@@ -35,7 +36,7 @@ const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   if (!newTaskInput) return;
 
-
+addTask(newTaskInput,newTaskType,image);
   setImage(null);
   closeModal();
 }

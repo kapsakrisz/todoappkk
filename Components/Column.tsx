@@ -22,8 +22,16 @@ const idToColumnText: {
 };
 
 function Column ({id,todos,index}:Props) {
-    const [searchString] =useBoardStore((state) =>[state.searchString]);
-    const openModal = useModalStore((state) =>state.openModal)
+    const [searchString,setNewTaskType] =useBoardStore((state) =>[
+    state.searchString,
+    state.setNewTaskType
+]);
+    const openModal = useModalStore((state) =>state.openModal);
+
+    const handleAddtodo = () =>{
+        setNewTaskType(id);
+        openModal();
+    }
 
 
 
@@ -85,7 +93,7 @@ function Column ({id,todos,index}:Props) {
                        {provided.placeholder}
 
                        <div className="flex items-end justify-end p-2">
-                        <button onClick={openModal} className="hover:text-green-600 text-green-500">
+                        <button onClick={handleAddtodo} className="hover:text-green-600 text-green-500">
                             <PlusCircleIcon className="h-10 w-10 "/>
                         </button>
                        </div>
