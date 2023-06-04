@@ -1,5 +1,6 @@
-import { databases, storage } from '@/appwrite';
+import { ID, databases, storage } from '@/appwrite';
 import { getTodosGroupedByColumn } from '@/lib/getTodosGroupedByColumns';
+import uploadImage from '@/lib/uploadImage';
 import { create } from 'zustand'
 
 interface BoardState {
@@ -11,7 +12,8 @@ newTaskInput:string;
 setNewTaskInput: (input: string)=>void;
 setNewTaskType:(columnId:TypedColumn) => void;
 newTaskType:TypedColumn;
-
+image:File|null;
+setImage:(image:File|null) => void;
 
 
 
@@ -20,7 +22,12 @@ newTaskType:TypedColumn;
 
 searchString:string;
 setSearchString:(searchString:string)=> void;
+
+addTask:(todo:string,columnId:TypedColumn,image?:File|null)=>void;
 deleteTask:(taskIndex:number,todoId:Todo,id:TypedColumn)=>void;
+
+
+
 }
 
 
@@ -36,6 +43,7 @@ export  const useBoardStore = create<BoardState>((set,get) => ({
   searchString:"",
   newTaskInput:"",
   newTaskType:"todo",
+  image:null,
   setSearchString:(searchString)=> set ({searchString}),
 
 
@@ -59,7 +67,7 @@ const newColumns= new Map(get().board.columns);
 
 
     if (todo.image) {
-      await storage.deleteFile(todo.image.bucketId, todo.image.fileid);
+      await storage.deleteFile(todo.image.bucketId, todo.image.fileId);
     }
 
 
@@ -73,6 +81,7 @@ const newColumns= new Map(get().board.columns);
 
   setNewTaskInput:(input:string)=> set({newTaskInput:input}),
  setNewTaskType:(columnId:TypedColumn)=>set({newTaskType:columnId}),
+ setImage:(image:File|null)=>set({image}),
   updateTodoInDB:async (todo, columnId)=> {
     await databases.updateDocument(
       process.env.NEXT_PUBLIC_DATABASE_ID!,
@@ -84,4 +93,34 @@ const newColumns= new Map(get().board.columns);
       }
     );
   },
+
+
+  addTask:async (todo:string,columnId:TypedColumn, image?:File|null)=>{
+      let file:Image|undefined;
+
+    if (image) {
+      const fileUploaded = await uploadImage(image);
+      if (fileUploaded) {
+        file={
+          bucketId:fileUploaded.bucketId,
+          fileId: fileUploaded.$id,
+        }; 
+      }
+    }
+    const {$id} =await databases.createDocument(
+      process.env.NEXT_PUBLIC_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID!,
+      ID.unique(),
+      {
+        title:todo,
+        status:columnId,
+        ...(file&& {image:JSON.stringify(file) }),
+      }
+
+    );
+    set({newTaskInput:""});
+
+
+
+  }
 }));
