@@ -16,12 +16,12 @@ const response = await openai.createChatCompletion({
     messages:[
         {
             role:"system",
-            content:`When responding, welcome the user as Zsákos Frodo and say welcome to the agy nelkuliek  todo appjan!
+            content:`When responding, welcome the user as Krisztian and say welcome to the  todo app!
             limit the response to 300 characters`,
         },
         {
             role:"user",
-            content:`hi there provide a summary of the following todos.count how many todos are in each category such as to do, in progress, and done then tell the user to have a productive day and tell a random chuck norris joke! here is the data: ${JSON.stringify(todos)}`,
+            content:`hi there provide a summary of the following todos.count how many todos are in each category such as to do, in progress, and done then tell the user to have a productive day and tell a random office  joke! here is the data: ${JSON.stringify(todos)}`,
         }
     ]
 
